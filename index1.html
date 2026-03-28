@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Futsal Juniores</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f0f0f0;color:#222}
+.hdr{background:#1a6b2e;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.hdr h1{font-size:16px;font-weight:600}
+.sv{font-size:10px;opacity:0;transition:opacity .5s;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:10px}
+.sv.on{opacity:1}
+.tabs{display:flex;background:#fff;border-bottom:2px solid #e0e0e0}
+.tab{flex:1;padding:10px 4px;font-size:12px;text-align:center;cursor:pointer;border:none;background:transparent;color:#888;border-bottom:3px solid transparent;margin-bottom:-2px}
+.tab.on{color:#1a6b2e;border-bottom-color:#1a6b2e;font-weight:600}
+.sec{display:none;padding:10px}
+.sec.on{display:block}
+input,textarea,select{border:1px solid #ddd;border-radius:6px;padding:6px 10px;font-size:13px;width:100%;background:#fff;color:#222;font-family:inherit}
+input:focus,textarea:focus{outline:none;border-color:#1a6b2e}
+.btn{padding:7px 14px;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-weight:500}
+.bg{background:#1a6b2e;color:#fff}
+.br{background:#ef4444;color:#fff}
+.bo{background:#fff;border:1px solid #ddd;color:#444}
+.card{background:#fff;border-radius:8px;padding:12px;margin-bottom:8px;border:1px solid #e8e8e8}
+.sbtns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.sb{padding:5px 11px;border-radius:16px;border:1.5px solid #ccc;background:#fff;font-size:12px;cursor:pointer;color:#555}
+.sb.on{background:#1a6b2e;color:#fff;border-color:#1a6b2e}
+.cw{background:#fff;border-radius:10px;padding:6px;margin-bottom:10px}
+#campo{display:block;width:100%;-webkit-user-select:none;user-select:none}
+.ic{background:#fff;border-radius:8px;padding:10px;margin-bottom:8px;border:1px solid #e8e8e8}
+.lbl{font-size:10px;color:#aaa;margin-bottom:3px}
+.leg{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:#555}
+.ld{width:11px;height:11px;border-radius:50%}
+.mb{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center}
+.mb.on{display:flex}
+.md{background:#fff;border-radius:12px;padding:16px;width:92%;max-width:360px;max-height:90vh;overflow-y:auto}
+.md h2{font-size:15px;font-weight:600;margin-bottom:12px}
+.mr{margin-bottom:10px}
+.mr label{font-size:11px;color:#888;display:block;margin-bottom:3px}
+.ps{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:4px}
+.po{padding:5px;text-align:center;border:1.5px solid #ddd;border-radius:6px;font-size:11px;cursor:pointer;color:#555}
+.po.on{border-color:#1a6b2e;background:#f0fdf4;color:#1a6b2e;font-weight:600}
+.jrow{display:flex;align-items:center;gap:8px;padding:8px;background:#fff;border-radius:8px;margin-bottom:6px;border:1px solid #e8e8e8}
+.av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.th{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tg{font-size:10px;background:#f2f2f2;color:#555;padding:2px 8px;border-radius:10px}
+</style>
+</head>
+<body>
+<div class="hdr"><h1>Futsal Juniores</h1><span class="sv" id="sv">guardado</span></div>
+<div class="tabs">
+  <button class="tab on" onclick="tab('tc',this)">Campo</button>
+  <button class="tab" onclick="tab('tp',this)">Plantel</button>
+  <button class="tab" onclick="tab('tt',this)">Taticas</button>
+</div>
+<div id="tc" class="sec on">
+  <div class="sbtns" id="stabs"></div>
+  <div class="cw"><svg id="campo" viewBox="0 0 440 260">
+    <rect width="440" height="260" fill="#1a6b2e" rx="8"/>
+    <rect x="20" y="20" width="400" height="220" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+    <line x1="220" y1="20" x2="220" y2="240" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+    <circle cx="220" cy="130" r="30" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+    <circle cx="220" cy="130" r="3" fill="rgba(255,255,255,.5)"/>
+    <rect x="20" y="90" width="50" height="80" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.5"/>
+    <rect x="370" y="90" width="50" height="80" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.5"/>
+    <rect x="20" y="110" width="20" height="40" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/>
+    <rect x="400" y="110" width="20" height="40" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/>
+    <g id="jgs"></g>
+  </svg></div>
+  <div class="ic" id="ji"><div class="lbl">jogador</div><div style="font-size:12px;color:#bbb">Toca num jogador</div></div>
+  <div class="ic"><div class="lbl">legenda</div><div class="leg">
+    <div class="li"><div class="ld" style="background:#f59e0b"></div>GR</div>
+    <div class="li"><div class="ld" style="background:#3b82f6"></div>Defesa</div>
+    <div class="li"><div class="ld" style="background:#10b981"></div>Medio</div>
+    <div class="li"><div class="ld" style="background:#ef4444"></div>Avanco</div>
+    <div class="li"><div class="ld" style="background:#8b5cf6"></div>Universal</div>
+  </div></div>
+</div>
+<div id="tp" class="sec">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <div style="font-size:12px;color:#888" id="tj"></div>
+    <button class="btn bg" onclick="abrirJ(null)">+ Jogador</button>
+  </div>
+  <div id="lj"></div>
+</div>
+<div id="tt" class="sec">
+  <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+    <button class="btn bg" onclick="abrirT(null)">+ Tatica</button>
+  </div>
+  <div id="lt"></div>
+</div>
+
+<div class="mb" id="mj">
+  <div class="md">
+    <h2 id="mjtit">Jogador</h2>
+    <div class="mr"><label>Nome</label><input type="text" id="jn" placeholder="Nome"></div>
+    <div class="mr"><label>Nr</label><input type="number" id="jnr" min="1" max="99" style="width:70px"></div>
+    <div class="mr"><label>Idade</label><input type="number" id="ji2" min="10" max="20" style="width:70px"></div>
+    <div class="mr"><label>Posicao</label>
+      <div class="ps">
+        <div class="po on" data-p="GR" onclick="sp(this)">GR</div>
+        <div class="po" data-p="Defesa" onclick="sp(this)">Defesa</div>
+        <div class="po" data-p="Ala" onclick="sp(this)">Ala</div>
+        <div class="po" data-p="Pivot" onclick="sp(this)">Pivot</div>
+        <div class="po" data-p="Medio" onclick="sp(this)">Medio</div>
+        <div class="po" data-p="Universal" onclick="sp(this)">Universal</div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px">
+      <button class="btn bo" onclick="fm('mj')">Cancelar</button>
+      <button class="btn br" id="bdj" onclick="apJ()" style="display:none">Apagar</button>
+      <button class="btn bg" onclick="gJ()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="mb" id="mt">
+  <div class="md">
+    <h2 id="mttit">Tatica</h2>
+    <div class="mr"><label>Nome</label><input type="text" id="tn" placeholder="ex: 2-2, Losango"></div>
+    <div class="mr"><label>Descricao</label><textarea id="td" rows="2" style="resize:none"></textarea></div>
+    <div class="mr">
+      <label>Posicoes (label,x,y — uma por linha)</label>
+      <textarea id="tp2" rows="6" style="resize:vertical;font-family:monospace;font-size:12px"></textarea>
+      <div style="font-size:10px;color:#aaa;margin-top:2px">ex: GR,45,130</div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px">
+      <button class="btn bo" onclick="fm('mt')">Cancelar</button>
+      <button class="btn br" id="bdt" onclick="apT()" style="display:none">Apagar</button>
+      <button class="btn bg" onclick="gT()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var CP={GR:'#f59e0b',Defesa:'#3b82f6',Ala:'#ef4444',Pivot:'#10b981',Universal:'#8b5cf6',Medio:'#06b6d4'};
+var DJ=[{id:1,nome:'Joao Silva',nr:1,pos:'GR',idade:16},{id:2,nome:'Miguel Santos',nr:5,pos:'Defesa',idade:15},{id:3,nome:'Rafael Costa',nr:7,pos:'Ala',idade:16},{id:4,nome:'Diogo Ferreira',nr:9,pos:'Pivot',idade:17},{id:5,nome:'Andre Rodrigues',nr:11,pos:'Ala',idade:15},{id:6,nome:'Tiago Oliveira',nr:3,pos:'Defesa',idade:16},{id:7,nome:'Goncalo Lima',nr:13,pos:'Universal',idade:17},{id:8,nome:'Pedro Almeida',nr:15,pos:'GR',idade:15}];
+var DT=[{id:'t1',nome:'2-2',desc:'Dois defesas + dois avancados.',jogs:[{l:'GR',x:45,y:130},{l:'DE',x:130,y:90},{l:'DD',x:130,y:170},{l:'AE',x:290,y:90},{l:'AD',x:290,y:170}]},{id:'t2',nome:'3-1',desc:'Tres jogadores + pivot avancado.',jogs:[{l:'GR',x:45,y:130},{l:'DL',x:150,y:80},{l:'DR',x:150,y:180},{l:'ME',x:160,y:130},{l:'PI',x:310,y:130}]},{id:'t3',nome:'1-2-1',desc:'Losango com rotacoes constantes.',jogs:[{l:'GR',x:45,y:130},{l:'PC',x:140,y:130},{l:'AL',x:220,y:80},{l:'AR',x:220,y:180},{l:'PA',x:320,y:130}]},{id:'t4',nome:'4-0',desc:'Rotacao dos 4 jogadores de campo.',jogs:[{l:'GR',x:45,y:130},{l:'J1',x:170,y:80},{l:'J2',x:170,y:180},{l:'J3',x:280,y:80},{l:'J4',x:280,y:180}]}];
+function ld(){try{var j=localStorage.getItem('fj');var t=localStorage.getItem('ft');var c=localStorage.getItem('fc');return{jogadores:j?JSON.parse(j):DJ,taticas:t?JSON.parse(t):DT,cur:c||'t1',pos:{}};}catch(e){return{jogadores:DJ,taticas:DT,cur:'t1',pos:{}};}}
+function sv(){try{localStorage.setItem('fj',JSON.stringify(S.jogadores));localStorage.setItem('ft',JSON.stringify(S.taticas));localStorage.setItem('fc',S.cur);var m=document.getElementById('sv');m.classList.add('on');setTimeout(function(){m.classList.remove('on')},1500);}catch(e){}}
+var S=ld(),ejid=null,etid=null;
+function tab(id,btn){document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('on')});document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on')});document.getElementById(id).classList.add('on');btn.classList.add('on');}
+function cL(l){var u=l.toUpperCase();if(u==='GR')return CP.GR;if(u[0]==='D'&&u!=='DE')return CP.Defesa;if(u==='DE'||u==='DD'||u==='DL'||u==='DR')return CP.Defesa;if(u==='PI'||u==='PC'||u==='PA'||u==='ME')return CP.Medio;if(u==='AL'||u==='AR'||u==='AE'||u==='AD')return CP.Ala;return '#888780';}
+function rTabs(){var el=document.getElementById('stabs');el.innerHTML=S.taticas.map(function(t){return'<button class="sb'+(t.id===S.cur?' on':'')+'" onclick="mT(\''+t.id+'\',this)">'+t.nome+'</button>'}).join('');}
+function mT(id){S.cur=id;S.pos={};sv();rTabs();rC();}
+function svgP(svg,cx,cy){var r=svg.getBoundingClientRect();return{x:(cx-r.left)*(440/r.width),y:(cy-r.top)*(260/r.height)};}
+function rC(){var svg=document.getElementById('campo'),g=document.getElementById('jgs');g.innerHTML='';var t=S.taticas.find(function(x){return x.id===S.cur});if(!t)return;t.jogs.forEach(function(j){var p=S.pos[j.l]||{x:j.x,y:j.y};var gr=document.createElementNS('http://www.w3.org/2000/svg','g');gr.setAttribute('transform','translate('+p.x+','+p.y+')');var ci=document.createElementNS('http://www.w3.org/2000/svg','circle');ci.setAttribute('r','20');ci.setAttribute('fill',cL(j.l));ci.setAttribute('stroke','rgba(255,255,255,.9)');ci.setAttribute('stroke-width','2.5');var tx=document.createElementNS('http://www.w3.org/2000/svg','text');tx.setAttribute('text-anchor','middle');tx.setAttribute('dy','4');tx.setAttribute('font-size','11');tx.setAttribute('font-weight','700');tx.setAttribute('fill','white');tx.setAttribute('pointer-events','none');tx.textContent=j.l;gr.appendChild(ci);gr.appendChild(tx);g.appendChild(gr);
+var drag=false,sx=0,sy=0,scx=0,scy=0,mv=false;
+function st(cx,cy){drag=true;mv=false;var q=svgP(svg,cx,cy),pp=S.pos[j.l]||{x:j.x,y:j.y};sx=q.x;sy=q.y;scx=pp.x;scy=pp.y;}
+function mo(cx,cy){if(!drag)return;mv=true;var q=svgP(svg,cx,cy);var nx=Math.max(22,Math.min(418,scx+(q.x-sx)));var ny=Math.max(22,Math.min(238,scy+(q.y-sy)));S.pos[j.l]={x:nx,y:ny};gr.setAttribute('transform','translate('+nx+','+ny+')');}
+function en(){if(!drag)return;drag=false;if(!mv){document.getElementById('ji').innerHTML='<div class="lbl">'+j.l+'</div><div style="font-size:12px;color:#444;margin-top:2px">Posicao: '+j.l+'</div>';}}
+gr.addEventListener('mousedown',function(e){e.preventDefault();st(e.clientX,e.clientY)});
+window.addEventListener('mousemove',function(e){mo(e.clientX,e.clientY)});
+window.addEventListener('mouseup',function(){en()});
+gr.addEventListener('touchstart',function(e){e.preventDefault();var t=e.targetTouches[0];st(t.clientX,t.clientY)},{passive:false});
+window.addEventListener('touchmove',function(e){if(drag){e.preventDefault();var t=e.targetTouches[0];mo(t.clientX,t.clientY)}},{passive:false});
+window.addEventListener('touchend',function(){en()});});}
+function rP(){var el=document.getElementById('lj');document.getElementById('tj').textContent=S.jogadores.length+' jogadores';el.innerHTML=S.jogadores.map(function(j){var c=CP[j.pos]||'#888';return'<div class="jrow"><div class="av" style="background:'+c+'">'+j.nr+'</div><div style="flex:1"><div style="font-size:13px;font-weight:500">'+j.nome+'</div><div style="font-size:10px;color:#888">'+j.pos+' - '+j.idade+' anos</div></div><button class="btn bo" style="padding:4px 10px;font-size:11px" onclick="abrirJ('+j.id+')">Editar</button></div>'}).join('');}
+function rT(){var el=document.getElementById('lt');el.innerHTML=S.taticas.map(function(t){return'<div class="card"><div class="th"><div style="font-size:14px;font-weight:600">'+t.nome+'</div><button class="btn bo" style="font-size:11px;padding:4px 10px" onclick="abrirT(\''+t.id+'\')">Editar</button></div><div style="font-size:12px;color:#666;margin-bottom:6px">'+t.desc+'</div><div class="tags">'+t.jogs.map(function(j){return'<span class="tg" style="background:'+cL(j.l)+'22;color:'+cL(j.l)+'">'+j.l+'</span>'}).join('')+'</div></div>'}).join('');}
+function abrirJ(id){ejid=id;var j=id?S.jogadores.find(function(x){return x.id===id}):null;document.getElementById('mjtit').textContent=j?'Editar Jogador':'Novo Jogador';document.getElementById('jn').value=j?j.nome:'';document.getElementById('jnr').value=j?j.nr:'';document.getElementById('ji2').value=j?j.idade:'';document.querySelectorAll('.po').forEach(function(el){el.classList.toggle('on',el.dataset.p===(j?j.pos:'GR'))});document.getElementById('bdj').style.display=j?'block':'none';document.getElementById('mj').classList.add('on');}
+function sp(el){document.querySelectorAll('.po').forEach(function(e){e.classList.remove('on')});el.classList.add('on');}
+function gJ(){var n=document.getElementById('jn').value.trim();var nr=parseInt(document.getElementById('jnr').value)||1;var id=parseInt(document.getElementById('ji2').value)||15;var p=document.querySelector('.po.on').dataset.p;if(!n)return;if(ejid){var j=S.jogadores.find(function(x){return x.id===ejid});if(j){j.nome=n;j.nr=nr;j.idade=id;j.pos=p;}}else{var mx=S.jogadores.reduce(function(m,j){return Math.max(m,j.id)},0);S.jogadores.push({id:mx+1,nome:n,nr:nr,pos:p,idade:id});}sv();rP();fm('mj');}
+function apJ(){if(!ejid)return;S.jogadores=S.jogadores.filter(function(j){return j.id!==ejid});sv();rP();fm('mj');}
+function abrirT(id){etid=id;var t=id?S.taticas.find(function(x){return x.id===id}):null;document.getElementById('mttit').textContent=t?'Editar Tatica':'Nova Tatica';document.getElementById('tn').value=t?t.nome:'';document.getElementById('td').value=t?t.desc:'';document.getElementById('tp2').value=t?t.jogs.map(function(j){return j.l+','+Math.round(j.x)+','+Math.round(j.y)}).join('\n'):'GR,45,130\nDE,130,90\nDD,130,170\nAE,290,90\nAD,290,170';document.getElementById('bdt').style.display=t?'block':'none';document.getElementById('mt').classList.add('on');}
+function gT(){var n=document.getElementById('tn').value.trim();var d=document.getElementById('td').value.trim();var raw=document.getElementById('tp2').value.trim().split('\n');var jogs=raw.filter(function(l){return l.trim()}).map(function(l){var p=l.split(',');return{l:(p[0]||'').trim(),x:parseFloat(p[1])||100,y:parseFloat(p[2])||130}});if(!n||!jogs.length)return;if(etid){var t=S.taticas.find(function(x){return x.id===etid});if(t){t.nome=n;t.desc=d;t.jogs=jogs;}}else{S.taticas.push({id:'t'+Date.now(),nome:n,desc:d,jogs:jogs});}sv();rAll();fm('mt');}
+function apT(){if(!etid)return;S.taticas=S.taticas.filter(function(t){return t.id!==etid});if(S.cur===etid)S.cur=S.taticas.length?S.taticas[0].id:'';sv();rAll();fm('mt');}
+function fm(id){document.getElementById(id).classList.remove('on');}
+function rAll(){rTabs();rC();rP();rT();}
+document.querySelectorAll('.mb').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)m.classList.remove('on')});});
+rAll();
+</script>
+</body>
+</html>
