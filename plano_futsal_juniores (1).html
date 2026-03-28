@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Plano Futsal Juniores</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#efefef;color:#222;-webkit-text-size-adjust:100%}
+.hdr{background:#1a6b2e;color:#fff;padding:14px;text-align:center}
+.hdr h1{font-size:17px;font-weight:600}
+.hdr p{font-size:11px;opacity:.75;margin-top:2px}
+.tabs{display:flex;background:#fff;border-bottom:1.5px solid #ddd}
+.tab{flex:1;padding:11px 4px;font-size:12px;text-align:center;cursor:pointer;border:none;background:transparent;color:#888;border-bottom:2.5px solid transparent;-webkit-tap-highlight-color:transparent}
+.tab.on{color:#1a6b2e;border-bottom-color:#1a6b2e;font-weight:600}
+.sec{display:none;padding:10px}
+.sec.on{display:block}
+.sbtns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.sb{padding:6px 12px;border-radius:20px;border:1.5px solid #bbb;background:#fff;font-size:12px;cursor:pointer;color:#555;-webkit-tap-highlight-color:transparent}
+.sb.on{background:#1a6b2e;color:#fff;border-color:#1a6b2e}
+.cw{background:#fff;border-radius:10px;padding:6px;margin-bottom:10px;overflow:hidden}
+.ic{background:#fff;border-radius:8px;padding:10px;margin-bottom:8px;border:1px solid #e8e8e8}
+.lbl{font-size:10px;color:#aaa;margin-bottom:3px}
+.val{font-size:14px;font-weight:600}
+.dsc{font-size:11px;color:#777;margin-top:3px;line-height:1.5}
+.leg{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:#555}
+.ld{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.blk{background:#fff;border-radius:8px;padding:10px;margin-bottom:8px;border:1px solid #e8e8e8;border-left-width:3px}
+.bh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.bn{font-size:13px;font-weight:500}
+.bd{font-size:10px;color:#999}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tg{font-size:10px;background:#f2f2f2;color:#555;padding:3px 8px;border-radius:10px}
+.jc{background:#fff;border-radius:8px;padding:10px;margin-bottom:7px;display:flex;align-items:center;gap:9px;border:1px solid #e8e8e8}
+.av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.jn{font-size:12px;font-weight:500}
+.ji{font-size:10px;color:#888;margin-top:2px}
+#campo{display:block;width:100%;-webkit-user-select:none;user-select:none}
+</style>
+</head>
+<body>
+<div class="hdr"><h1>Futsal Juniores</h1><p>Plano de Jogo Interativo</p></div>
+<div class="tabs">
+<button class="tab on" onclick="tab('tc',this)">Tatico</button>
+<button class="tab" onclick="tab('tr',this)">Treino</button>
+<button class="tab" onclick="tab('pl',this)">Plantel</button>
+</div>
+<div id="tc" class="sec on">
+<div class="sbtns">
+<button class="sb on" onclick="sis('2-2',this)">2-2</button>
+<button class="sb" onclick="sis('3-1',this)">3-1</button>
+<button class="sb" onclick="sis('1-2-1',this)">1-2-1</button>
+<button class="sb" onclick="sis('4-0',this)">4-0</button>
+</div>
+<div class="cw">
+<svg id="campo" viewBox="0 0 440 260">
+<rect width="440" height="260" fill="#1a6b2e" rx="8"/>
+<rect x="20" y="20" width="400" height="220" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+<line x1="220" y1="20" x2="220" y2="240" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+<circle cx="220" cy="130" r="30" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+<circle cx="220" cy="130" r="3" fill="rgba(255,255,255,.5)"/>
+<rect x="20" y="90" width="50" height="80" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.5"/>
+<rect x="370" y="90" width="50" height="80" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.5"/>
+<rect x="20" y="110" width="20" height="40" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/>
+<rect x="400" y="110" width="20" height="40" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/>
+<g id="jgs"></g>
+</svg>
+</div>
+<div class="ic"><div class="lbl">sistema</div><div class="val" id="ns">2-2</div><div class="dsc" id="ds">Dois defesas + dois avancados. Equilibrio entre defesa e ataque.</div></div>
+<div class="ic" id="ji"><div class="lbl">jogador</div><div class="dsc" style="color:#ccc">Toca ou arrasta um jogador</div></div>
+<div class="ic"><div class="lbl">legenda</div><div class="leg">
+<div class="li"><div class="ld" style="background:#f59e0b"></div>Guarda-redes</div>
+<div class="li"><div class="ld" style="background:#3b82f6"></div>Defesa</div>
+<div class="li"><div class="ld" style="background:#10b981"></div>Medio/Pivot</div>
+<div class="li"><div class="ld" style="background:#ef4444"></div>Avancado</div>
+</div></div>
+</div>
+<div id="tr" class="sec"></div>
+<div id="pl" class="sec"></div>
+<script>
+var S={'2-2':{n:'2-2',d:'Dois defesas + dois avancados. Equilibrio entre defesa e ataque.',j:[{l:'GR',c:'#f59e0b',x:45,y:130,p:'Guarda-redes',t:'Comunicar com a defesa. Sair as bolas paradas.'},{l:'DE',c:'#3b82f6',x:130,y:90,p:'Defesa esq.',t:'Cobrir lado esquerdo. Apoiar saida de bola.'},{l:'DD',c:'#3b82f6',x:130,y:170,p:'Defesa dir.',t:'Cobrir lado direito. Apoiar saida de bola.'},{l:'AE',c:'#ef4444',x:290,y:90,p:'Avancado esq.',t:'Pressao alta, cantos e cruzamentos.'},{l:'AD',c:'#ef4444',x:290,y:170,p:'Avancado dir.',t:'Pressao alta, rematar ao primeiro poste.'}]},'3-1':{n:'3-1',d:'Tres jogadores de base + pivot avancado. Forte em posse.',j:[{l:'GR',c:'#f59e0b',x:45,y:130,p:'Guarda-redes',t:'Participar como 5 elemento na saida.'},{l:'DL',c:'#3b82f6',x:150,y:80,p:'Ala esq.',t:'Manter largura e apoio lateral.'},{l:'DR',c:'#3b82f6',x:150,y:180,p:'Ala dir.',t:'Manter largura e apoio lateral.'},{l:'ME',c:'#10b981',x:160,y:130,p:'Universal',t:'Ligar jogo. Cobrir espaco central.'},{l:'PI',c:'#ef4444',x:310,y:130,p:'Pivot',t:'Fixar defesa adversaria. Jogar de costas.'}]},'1-2-1':{n:'1-2-1',d:'Pivot recuado, dois alas e pivot avancado. Rotacoes constantes.',j:[{l:'GR',c:'#f59e0b',x:45,y:130,p:'Guarda-redes',t:'Arranque rapido na saida curta.'},{l:'PC',c:'#3b82f6',x:140,y:130,p:'Pivot recuado',t:'Diretor de jogo. Ligar linhas.'},{l:'AL',c:'#10b981',x:220,y:80,p:'Ala esq.',t:'Explorar corredor lateral.'},{l:'AR',c:'#10b981',x:220,y:180,p:'Ala dir.',t:'Explorar corredor lateral.'},{l:'PA',c:'#ef4444',x:320,y:130,p:'Pivot avancado',t:'Finalizar e pressionar GR adversario.'}]},'4-0':{n:'4-0',d:'Sem pivot fixo. Rotacao dos 4 jogadores de campo.',j:[{l:'GR',c:'#f59e0b',x:45,y:130,p:'Guarda-redes',t:'Envolvimento total na circulacao.'},{l:'J1',c:'#3b82f6',x:170,y:80,p:'Posicao 1',t:'Rodar para posicao 2 apos passe.'},{l:'J2',c:'#3b82f6',x:170,y:180,p:'Posicao 2',t:'Rodar para posicao 3 apos passe.'},{l:'J3',c:'#10b981',x:280,y:80,p:'Posicao 3',t:'Rodar para posicao 4 apos passe.'},{l:'J4',c:'#10b981',x:280,y:180,p:'Posicao 4',t:'Rodar para posicao 1 apos passe.'}]}};
+var T=[{b:'Aquecimento',d:'10 min',c:'#f59e0b',e:['Corrida livre','Passe a 2','Alongamentos']},{b:'Tecnica individual',d:'15 min',c:'#3b82f6',e:['Conducao com mudanca','Remate apos receca','Drible 1x1']},{b:'Exercicio tatico',d:'20 min',c:'#10b981',e:['Circulacao 4x0','Saida de pressao 3x2','Posicionamento']},{b:'Jogo reduzido',d:'15 min',c:'#ef4444',e:['3x3 + GR','Min 3 toques','Velocidade decisao']},{b:'Retorno a calma',d:'5 min',c:'#888',e:['Alongamentos estaticos','Circulo feedback']}];
+var P=[{n:'Joao Silva',nr:1,p:'GR',i:16},{n:'Miguel Santos',nr:5,p:'Defesa',i:15},{n:'Rafael Costa',nr:7,p:'Ala',i:16},{n:'Diogo Ferreira',nr:9,p:'Pivot',i:17},{n:'Andre Rodrigues',nr:11,p:'Ala',i:15},{n:'Tiago Oliveira',nr:3,p:'Defesa',i:16},{n:'Goncalo Lima',nr:13,p:'Universal',i:17},{n:'Pedro Almeida',nr:15,p:'GR',i:15}];
+var cp={GR:'#f59e0b',Defesa:'#3b82f6',Ala:'#ef4444',Pivot:'#10b981',Universal:'#8b5cf6'};
+var cur='2-2',pos={};
+function tab(id,btn){document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('on')});document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on')});document.getElementById(id).classList.add('on');btn.classList.add('on');}
+function sis(nm,btn){document.querySelectorAll('.sb').forEach(function(b){b.classList.remove('on')});btn.classList.add('on');cur=nm;pos={};S[nm].j.forEach(function(j){pos[j.l]={x:j.x,y:j.y}});rend();document.getElementById('ns').textContent=S[nm].n;document.getElementById('ds').textContent=S[nm].d;document.getElementById('ji').innerHTML='<div class="lbl">jogador</div><div class="dsc" style="color:#ccc">Toca ou arrasta</div>';}
+function svgPt(svg,cx,cy){var r=svg.getBoundingClientRect();return{x:(cx-r.left)*(440/r.width),y:(cy-r.top)*(260/r.height)};}
+function rend(){var svg=document.getElementById('campo'),g=document.getElementById('jgs');g.innerHTML='';S[cur].j.forEach(function(j){var p=pos[j.l]||{x:j.x,y:j.y};var gr=document.createElementNS('http://www.w3.org/2000/svg','g');gr.setAttribute('transform','translate('+p.x+','+p.y+')');var ci=document.createElementNS('http://www.w3.org/2000/svg','circle');ci.setAttribute('r','20');ci.setAttribute('fill',j.c);ci.setAttribute('stroke','rgba(255,255,255,.9)');ci.setAttribute('stroke-width','2.5');var tx=document.createElementNS('http://www.w3.org/2000/svg','text');tx.setAttribute('text-anchor','middle');tx.setAttribute('dy','4');tx.setAttribute('font-size','12');tx.setAttribute('font-weight','700');tx.setAttribute('fill','white');tx.setAttribute('pointer-events','none');tx.textContent=j.l;gr.appendChild(ci);gr.appendChild(tx);g.appendChild(gr);
+var drag=false,sx=0,sy=0,scx=0,scy=0,moved=false;
+function start(cx,cy){drag=true;moved=false;var q=svgPt(svg,cx,cy),pp=pos[j.l]||{x:j.x,y:j.y};sx=q.x;sy=q.y;scx=pp.x;scy=pp.y;}
+function move(cx,cy){if(!drag)return;moved=true;var q=svgPt(svg,cx,cy);var nx=Math.max(22,Math.min(418,scx+(q.x-sx)));var ny=Math.max(22,Math.min(238,scy+(q.y-sy)));pos[j.l]={x:nx,y:ny};gr.setAttribute('transform','translate('+nx+','+ny+')');}
+function end(){if(!drag)return;drag=false;if(!moved){document.getElementById('ji').innerHTML='<div class="lbl">'+j.p+'</div><div class="dsc">'+j.t+'</div>';}}
+gr.addEventListener('mousedown',function(e){e.preventDefault();start(e.clientX,e.clientY)});
+window.addEventListener('mousemove',function(e){move(e.clientX,e.clientY)});
+window.addEventListener('mouseup',function(){end()});
+gr.addEventListener('touchstart',function(e){e.preventDefault();var t=e.targetTouches[0];start(t.clientX,t.clientY)},{passive:false});
+window.addEventListener('touchmove',function(e){if(drag){e.preventDefault();var t=e.targetTouches[0];move(t.clientX,t.clientY)}},{passive:false});
+window.addEventListener('touchend',function(){end()});});}
+document.getElementById('tr').innerHTML=T.map(function(b){return'<div class="blk" style="border-left-color:'+b.c+'"><div class="bh"><span class="bn">'+b.b+'</span><span class="bd">'+b.d+'</span></div><div class="tags">'+b.e.map(function(e){return'<span class="tg">'+e+'</span>'}).join('')+'</div></div>';}).join('');
+document.getElementById('pl').innerHTML=P.map(function(j){return'<div class="jc"><div class="av" style="background:'+(cp[j.p]||'#888')+'">'+j.nr+'</div><div><div class="jn">'+j.n+'</div><div class="ji">'+j.p+' - '+j.i+' anos</div></div></div>';}).join('');
+S['2-2'].j.forEach(function(j){pos[j.l]={x:j.x,y:j.y}});rend();
+</script>
+</body>
+</html>
